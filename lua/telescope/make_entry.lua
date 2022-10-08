@@ -354,8 +354,8 @@ function make_entry.gen_from_git_stash(opts)
   local displayer = entry_display.create {
     separator = " ",
     items = {
-      { width = 10 },
-      opts.show_branch and { width = 15 } or "",
+      {},
+      {},
       { remaining = true },
     },
   }
@@ -394,7 +394,7 @@ function make_entry.gen_from_git_commits(opts)
   local displayer = entry_display.create {
     separator = " ",
     items = {
-      { width = 8 },
+      {},
       { remaining = true },
     },
   }
@@ -434,17 +434,14 @@ function make_entry.gen_from_quickfix(opts)
 
   local hidden = utils.is_path_hidden(opts)
   local items = {
-    { width = vim.F.if_nil(opts.fname_width, 30) },
+    {},
     { remaining = true },
   }
-  if hidden then
-    items[1] = { width = 8 }
-  end
   if not show_line then
     table.remove(items, 1)
   end
 
-  local displayer = entry_display.create { separator = "▏", items = items }
+  local displayer = entry_display.create { separator = ": ", items = items }
 
   local make_display = function(entry)
     local input = {}
@@ -579,9 +576,9 @@ function make_entry.gen_from_buffer(opts)
   local displayer = entry_display.create {
     separator = " ",
     items = {
-      { width = opts.bufnr_width },
-      { width = 4 },
-      { width = icon_width },
+      {},
+      {},
+      {},
       { remaining = true },
     },
   }
@@ -633,13 +630,13 @@ function make_entry.gen_from_treesitter(opts)
   local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 
   local display_items = {
-    { width = 25 },
-    { width = 10 },
+    {},
+    {},
     { remaining = true },
   }
 
   if opts.show_line then
-    table.insert(display_items, 2, { width = 6 })
+    table.insert(display_items, 2, {})
   end
 
   local displayer = entry_display.create {
@@ -726,7 +723,7 @@ function make_entry.gen_from_apropos(opts)
   local displayer = entry_display.create {
     separator = " ",
     items = {
-      { width = 30 },
+      {},
       { remaining = true },
     },
   }
@@ -778,7 +775,7 @@ function make_entry.gen_from_registers(opts)
     separator = " ",
     hl_chars = { ["["] = "TelescopeBorder", ["]"] = "TelescopeBorder" },
     items = {
-      { width = 3 },
+      {},
       { remaining = true },
     },
   }
@@ -817,8 +814,8 @@ function make_entry.gen_from_keymaps(opts)
   local displayer = require("telescope.pickers.entry_display").create {
     separator = "▏",
     items = {
-      { width = 2 },
-      { width = opts.width_lhs },
+      {},
+      {},
       { remaining = true },
     },
   }
@@ -863,7 +860,7 @@ function make_entry.gen_from_picker(opts)
   local displayer = entry_display.create {
     separator = " │ ",
     items = {
-      { width = 0.5 },
+      {},
       { remaining = true },
     },
   }
@@ -889,7 +886,7 @@ function make_entry.gen_from_buffer_lines(opts)
   local displayer = entry_display.create {
     separator = " │ ",
     items = {
-      { width = 5 },
+      {},
       { remaining = true },
     },
   }
@@ -939,9 +936,9 @@ function make_entry.gen_from_vimoptions(opts)
     separator = "",
     hl_chars = { ["["] = "TelescopeBorder", ["]"] = "TelescopeBorder" },
     items = {
-      { width = 25 },
-      { width = 12 },
-      { width = 11 },
+      {},
+      {},
+      {},
       { remaining = true },
     },
   }
@@ -1259,12 +1256,11 @@ local git_icon_defaults = {
 function make_entry.gen_from_git_status(opts)
   opts = opts or {}
 
-  local col_width = ((opts.git_icons and opts.git_icons.added) and opts.git_icons.added:len() + 2) or 2
   local displayer = entry_display.create {
     separator = "",
     items = {
-      { width = col_width },
-      { width = col_width },
+      {},
+      {},
       { remaining = true },
     },
   }
